@@ -1,23 +1,9 @@
 class World {
     character = new Character();
+    clouds = level1.clouds;
+    backgrounds = level1.backgrounds;
+    enemies = level1.enemies;
 
-    clouds = [
-        new Cloud('img/5_background/layers/4_clouds/1.png'),
-    ]
-
-    backgrounds = [
-        new Background('img/5_background/layers/air.png',480),
-        new Background('img/5_background/layers/3_third_layer/2.png', 600),
-        new Background('img/5_background/layers/2_second_layer/2.png', 550),
-        new Background('img/5_background/layers/1_first_layer/2.png',480),
-
-    ]
-
-    enemies = [
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
-    ];
     canvas;
     ctx;
     pixelRatio;
@@ -30,6 +16,7 @@ class World {
         this.ctx = canvas.getContext('2d');
         this.pixelRatio = window.devicePixelRatio || 1;
 
+
         // Set the canvas size to 750x480 and scale for high-DPI displays
         this.scaleCanvas(750, 480);
 
@@ -38,8 +25,11 @@ class World {
     }
 
     setWorld() {
-        this.character.world = this; 
+        this.character.world = this;
+        this.moveableObjects = this;
+
     }
+
 
     scaleCanvas(width, height) {
         // Set the logical dimensions
@@ -68,7 +58,7 @@ class World {
         this.ctx.translate(-this.camera_x, 0);
 
 
-    
+
 
         let self = this;
         requestAnimationFrame(function () {
