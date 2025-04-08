@@ -26,18 +26,24 @@ class Character extends MovableObject {
 
         setInterval(() => {
             if (this.world.inputs.KeyD) {
+                if (this.world.isEndlessLevel = true) {
+                    
+                }
                 this.x += this.speed;
                 this.otherDirection = false;
-                this.checkForPosition(this.world.backgrounds[4].x + 200 < this.world.character.x || this.world.backgrounds[4].x + 600 < this.world.character.x)
+                if (this.world.isEndlessLevel = true) {
+                    this.checkForPosition(this.world.backgrounds[4].x + 200 < this.world.character.x || this.world.backgrounds[4].x + 600 < this.world.character.x)
+                }
 
             }
-            if (this.world.inputs.KeyA) {
+            if (this.world.inputs.KeyA && (this.world.isEndlessLevel || this.x > 0)) {
                 this.x -= this.speed;
                 this.otherDirection = true;
-                this.checkForPosition(this.world.backgrounds[4].x > this.world.character.x || this.world.backgrounds[4].x > this.world.character.x)
-
+                if (this.world.isEndlessLevel = true) {
+                    this.checkForPosition(this.world.backgrounds[4].x > this.world.character.x || this.world.backgrounds[4].x > this.world.character.x)
+                }
             }
-            this.world.camera_x = -this.x;
+            this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
 
         setInterval(() => {
@@ -47,11 +53,6 @@ class Character extends MovableObject {
                 let path = this.framesWalking[i];
                 this.img = this.renderFrames[path];
                 this.currentImage++;
-                console.log(this.world.character.x);
-                console.log(this.world.backgrounds[4].x);
-
-
-
             }
         }, 50);
     }

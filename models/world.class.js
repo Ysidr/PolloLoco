@@ -1,4 +1,5 @@
 class World {
+    isEndlessLevel= true;
     character = new Character();
     clouds = level1.clouds;
     backgrounds = level1.backgrounds;
@@ -9,7 +10,7 @@ class World {
     ctx;
     pixelRatio;
     inputs;
-    camera_x = 0;
+    camera_x = 0
 
     constructor(canvas, inputs) {
         console.log(this.positionX);
