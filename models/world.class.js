@@ -22,6 +22,7 @@ class World {
     ctx;
     pixelRatio;
     inputs;
+    camera_x = 0;
 
     constructor(canvas, inputs) {
         this.canvas = canvas;
@@ -57,10 +58,15 @@ class World {
         // Clear the canvas
         this.ctx.clearRect(0, 0, 750, 480);
 
+        this.ctx.translate(this.camera_x, 0);
+
         this.addObjectsToMap(this.backgrounds);
         this.addObjectsToMap(this.clouds);
         this.addObjectsToMap(this.enemies);
         this.addToMap(this.character)
+
+        this.ctx.translate(-this.camera_x, 0);
+
 
     
 
@@ -77,7 +83,17 @@ class World {
     }
 
     addToMap(mo) {
+        if (mo.otherDirection) {
+            this.ctx.save();
+            this.ctx.translate(mo.width, 0);
+            this.ctx.scale(-1, 1);
+            mo.x = -mo.x;
+        }
         this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+        if (mo.otherDirection) {
+            mo.x = -mo.x;
+            this.ctx.restore();
+        }
     }
 
 }
