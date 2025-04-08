@@ -3,6 +3,7 @@ class World {
     clouds = level1.clouds;
     backgrounds = level1.backgrounds;
     enemies = level1.enemies;
+    positionX = this.character.x;
 
     canvas;
     ctx;
@@ -11,6 +12,8 @@ class World {
     camera_x = 0;
 
     constructor(canvas, inputs) {
+        console.log(this.positionX);
+        
         this.canvas = canvas;
         this.inputs = inputs;
         this.ctx = canvas.getContext('2d');
@@ -59,7 +62,6 @@ class World {
 
 
 
-
         let self = this;
         requestAnimationFrame(function () {
             self.draw();
@@ -85,5 +87,6 @@ class World {
             this.ctx.restore();
         }
     }
-
 }
+
+
