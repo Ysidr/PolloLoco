@@ -7,9 +7,9 @@ class World {
 
     backgrounds = [
         new Background('img/5_background/layers/air.png',480),
-        new Background('img/5_background/layers/3_third_layer/2.png', 600),//700
-        new Background('img/5_background/layers/2_second_layer/2.png', 550),//550
-        new Background('img/5_background/layers/1_first_layer/2.png',480),//400
+        new Background('img/5_background/layers/3_third_layer/2.png', 600),
+        new Background('img/5_background/layers/2_second_layer/2.png', 550),
+        new Background('img/5_background/layers/1_first_layer/2.png',480),
 
     ]
 
@@ -21,9 +21,11 @@ class World {
     canvas;
     ctx;
     pixelRatio;
+    inputs;
 
-    constructor(canvas) {
+    constructor(canvas, inputs) {
         this.canvas = canvas;
+        this.inputs = inputs;
         this.ctx = canvas.getContext('2d');
         this.pixelRatio = window.devicePixelRatio || 1;
 
@@ -31,6 +33,11 @@ class World {
         this.scaleCanvas(750, 480);
 
         this.draw();
+        this.setWorld();
+    }
+
+    setWorld() {
+        this.character.world = this; 
     }
 
     scaleCanvas(width, height) {
