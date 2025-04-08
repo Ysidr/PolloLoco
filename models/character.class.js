@@ -25,13 +25,10 @@ class Character extends MovableObject {
     animate() {
 
         setInterval(() => {
-            if (this.world.inputs.KeyD) {
-                if (this.world.isEndlessLevel = true) {
-                    
-                }
+            if (this.world.inputs.KeyD && (this.world.isEndlessLevel || this.x < this.world.level.levelEndX)) {
                 this.x += this.speed;
                 this.otherDirection = false;
-                if (this.world.isEndlessLevel = true) {
+                if (this.world.isEndlessLevel == true) {
                     this.checkForPosition(this.world.backgrounds[4].x + 200 < this.world.character.x || this.world.backgrounds[4].x + 600 < this.world.character.x)
                 }
 
@@ -39,7 +36,7 @@ class Character extends MovableObject {
             if (this.world.inputs.KeyA && (this.world.isEndlessLevel || this.x > 0)) {
                 this.x -= this.speed;
                 this.otherDirection = true;
-                if (this.world.isEndlessLevel = true) {
+                if (this.world.isEndlessLevel == true) {
                     this.checkForPosition(this.world.backgrounds[4].x > this.world.character.x || this.world.backgrounds[4].x > this.world.character.x)
                 }
             }

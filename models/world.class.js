@@ -1,20 +1,20 @@
 class World {
-    isEndlessLevel= true;
+    isEndlessLevel = false;
     character = new Character();
-    clouds = level1.clouds;
+    level = level1
     backgrounds = level1.backgrounds;
-    enemies = level1.enemies;
     positionX = this.character.x;
-
+    isEndlessLevel;
     canvas;
     ctx;
     pixelRatio;
     inputs;
     camera_x = 0
 
-    constructor(canvas, inputs) {
+    constructor(canvas, inputs, isEndlessLevel) {
         console.log(this.positionX);
-        
+        this.isEndlessLevel = isEndlessLevel;
+
         this.canvas = canvas;
         this.inputs = inputs;
         this.ctx = canvas.getContext('2d');
@@ -55,8 +55,8 @@ class World {
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.backgrounds);
-        this.addObjectsToMap(this.clouds);
-        this.addObjectsToMap(this.enemies);
+        this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.level.enemies);
         this.addToMap(this.character)
 
         this.ctx.translate(-this.camera_x, 0);
