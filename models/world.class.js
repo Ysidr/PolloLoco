@@ -1,6 +1,18 @@
 class World {
     character = new Character();
 
+    clouds = [
+        new Cloud('img/5_background/layers/4_clouds/1.png'),
+    ]
+
+    backgrounds = [
+        new Background('img/5_background/layers/air.png',480),
+        new Background('img/5_background/layers/3_third_layer/2.png', 600),//700
+        new Background('img/5_background/layers/2_second_layer/2.png', 550),//550
+        new Background('img/5_background/layers/1_first_layer/2.png',480),//400
+
+    ]
+
     enemies = [
         new Chicken(),
         new Chicken(),
@@ -37,19 +49,28 @@ class World {
     draw() {
         // Clear the canvas
         this.ctx.clearRect(0, 0, 750, 480);
-        this.ctx.imageSmoothingQuality = "high";
 
-        // Draw the character
-        this.ctx.drawImage(this.character.img, this.character.x, this.character.y, this.character.width, this.character.height);
+        this.addObjectsToMap(this.backgrounds);
+        this.addObjectsToMap(this.clouds);
+        this.addObjectsToMap(this.enemies);
+        this.addToMap(this.character)
 
-        // Draw the enemies
-        this.enemies.forEach(enemy => {
-            this.ctx.drawImage(enemy.img, enemy.x, enemy.y, enemy.width, enemy.height);
-        });
+    
 
         let self = this;
         requestAnimationFrame(function () {
             self.draw();
         });
     }
+
+    addObjectsToMap(objects) {
+        objects.forEach(o => {
+            this.addToMap(o);
+        });
+    }
+
+    addToMap(mo) {
+        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+    }
+
 }
