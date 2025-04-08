@@ -3,9 +3,7 @@ let world;
 
 
 function init() {
-    canvas = document.getElementById("gameCanvas");
-    let world = new World(canvas)
-    console.log(world.character);
-    
-    
+    canvas = document.getElementById("canvas");
+    world = new World(canvas)
+    console.log(world);
 }

@@ -5,8 +5,8 @@ body {
     flex-direction: column;
     align-items: center;
 }
-canvas {
-    width: 720px;
+.canvas {
+    width: 750px;
     height: 480px;
     background-color: black;
 }
