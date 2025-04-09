@@ -46,10 +46,7 @@ class Character extends MovableObject {
         setInterval(() => {
 
             if (this.world.inputs.KeyD || this.world.inputs.KeyA) {
-                let i = this.currentImage % this.framesWalking.length;
-                let path = this.framesWalking[i];
-                this.img = this.renderFrames[path];
-                this.currentImage++;
+                this.playAnimation(this.framesWalking);
             }
         }, 50);
     }
