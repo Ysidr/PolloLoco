@@ -22,12 +22,31 @@ class Character extends MovableObject {
         'img/2_character_pepe/3_jump/J-39.png',
     ];
 
+    framesDead = [
+        'img/2_character_pepe/5_dead/D-51.png',
+        'img/2_character_pepe/5_dead/D-52.png',
+        'img/2_character_pepe/5_dead/D-53.png',
+        'img/2_character_pepe/5_dead/D-54.png',
+        'img/2_character_pepe/5_dead/D-55.png',
+        'img/2_character_pepe/5_dead/D-56.png',
+        'img/2_character_pepe/5_dead/D-57.png',
+    ];
+
+    framesHurt = [
+        'img/2_character_pepe/4_hurt/H-41.png',
+        'img/2_character_pepe/4_hurt/H-42.png',
+        'img/2_character_pepe/4_hurt/H-43.png',
+    ];
+
     world;
     constructor() {
         super().loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
         this.y = 480 - this.height - 40;
         this.loadImages(this.framesWalking);
         this.loadImages(this.framesJumping);
+        this.loadImages(this.framesHurt);
+        this.loadImages(this.framesDead);
+
         this.animate();
         this.applyGravity();
 
@@ -51,10 +70,17 @@ class Character extends MovableObject {
         }, 1000 / 60);
 
         setInterval(() => {
-            if (this.isAboveGround()) {
-                this.playAnimation(this.framesJumping);
-            } else {
 
+            if (this.isDead()) {
+                this.playAnimation(this.framesDead);
+
+            } else if (this.isHurt()) {
+                this.playAnimation(this.framesHurt);
+
+            } else if (this.isAboveGround()) {
+                this.playAnimation(this.framesJumping);
+
+            } else {
                 if (this.world.inputs.KeyD || this.world.inputs.KeyA) {
                     this.playAnimation(this.framesWalking);
                 }
@@ -98,6 +124,5 @@ class Character extends MovableObject {
         this.world.backgrounds.splice(startIndex, endIndex + 1)
         this.world.backgrounds.push(...group);
     };
-
 
 }
