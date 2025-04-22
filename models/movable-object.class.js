@@ -49,9 +49,32 @@ class MovableObject {
 
     moveRight() {
         this.x += this.speed;
+        if (this instanceof Character) {
+            this.isEndlessLevel("right");
+            this.otherDirection = false;
+        }
     }
 
     moveLeft() {
         this.x -= this.speed;
+        if (this instanceof Character) {
+            this.isEndlessLevel("left");
+            this.otherDirection = true;
+        }
     }
+
+    draw(ctx) {
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    }
+
+    drawFrame(ctx) {
+        if (this instanceof Character || this instanceof Chicken) {
+            ctx.beginPath();
+            ctx.lineWidth = '3';
+            ctx.strokeStyle = 'blue';
+            ctx.rect(this.x, this.y, this.width, this.height);
+            ctx.stroke();
+        }
+    }
+
 }

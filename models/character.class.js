@@ -39,16 +39,11 @@ class Character extends MovableObject {
 
         setInterval(() => {
             if (this.world.inputs.KeyD && (this.world.isEndlessLevel || this.x < this.world.level.levelEndX)) {
-                this.otherDirection = false;
                 this.moveRight();
-                this.isEndlessLevel("right");
             }
             if (this.world.inputs.KeyA && (this.world.isEndlessLevel || this.x > 0)) {
-                this.otherDirection = true;
                 this.moveLeft();
-                this.isEndlessLevel("left");
             }
-
             if (this.world.inputs.Space && !this.isAboveGround()) {
                 this.jump();
             }
