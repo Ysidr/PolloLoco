@@ -11,6 +11,13 @@ class MovableObject {
     hp = 100;
     lastHit = 0;
 
+    offset = {
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0
+    }
+
 
     loadImage(path) {
         this.img = new Image();
@@ -70,34 +77,41 @@ class MovableObject {
     }
 
     drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Chicken) {
+        if (this instanceof Character || this instanceof Chicken | this instanceof Endboss) {
             ctx.beginPath();
             ctx.lineWidth = '3';
             ctx.strokeStyle = 'blue';
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         }
+        if (this instanceof Character || this instanceof Chicken || this instanceof Endboss) {
+            ctx.beginPath();
+            ctx.lineWidth = '3';
+            ctx.strokeStyle = 'red';
+            ctx.rect(this.x + this.offset.left, this.y + this.offset.top, this.width - this.offset.right, this.height - this.offset.bottom);
+            ctx.stroke();
+        }
     }
 
     isColliding(mo) {
-        return this.x + this.width > mo.x &&
-        this.y + this.height > mo.y &&
-        this.x < mo.x &&
-        this.y < mo.y + mo.height;
-    } 
+        return this.x + this.width - this.offset.left > mo.x + mo.offset.left &&
+            this.y + this.height - this.offset.bottom > mo.y + mo.offset.bottom &&
+            this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
+            this.y + this.offset.right < mo.y + mo.height- mo.offset.bottom;
+    }
 
-    hit () {
+    hit() {
         this.hp -= 5;
         if (this.hp <= 0) {
             this.hp = 0;
-        }else{
+        } else {
             this.lastHit = new Date().getTime();
         }
     }
 
     isHurt() {
-        let timepassed = new Date().getTime() - this.lastHit;        
-        timepassed = timepassed / 1000;
+        let timepassed = new Date().getTime() - this.lastHit;
+        timepassed = timepassed / 100;
         return timepassed < 1;
     }
 

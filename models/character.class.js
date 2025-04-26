@@ -38,6 +38,13 @@ class Character extends MovableObject {
         'img/2_character_pepe/4_hurt/H-43.png',
     ];
 
+    offset = {
+        top: 140,
+        bottom: 180,
+        left: 60,
+        right: 130
+    }
+
     world;
     constructor() {
         super().loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
