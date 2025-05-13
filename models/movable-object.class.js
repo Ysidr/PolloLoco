@@ -1,11 +1,7 @@
-class MovableObject {
-    x = 50;
-    y = 250
-    img;
+class MovableObject extends DrawableObject {
+    
     speedY = 0;
     acceleration = 2.5;
-    renderFrames = {}
-    currentImage = 0;
     speed = 0.15;
     otherDirection = false;
     hp = 100;
@@ -18,19 +14,6 @@ class MovableObject {
         right: 0
     }
 
-
-    loadImage(path) {
-        this.img = new Image();
-        this.img.src = path;
-    }
-
-    loadImages(arr) {
-        arr.forEach((path) => {
-            let img = new Image();
-            img.src = path;
-            this.renderFrames[path] = img;
-        });
-    }
 
     playAnimation(images) {
         let i = this.currentImage % images.length;
@@ -72,26 +55,9 @@ class MovableObject {
         }
     }
 
-    draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-    }
 
-    drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Chicken | this instanceof Endboss) {
-            ctx.beginPath();
-            ctx.lineWidth = '3';
-            ctx.strokeStyle = 'blue';
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-        }
-        if (this instanceof Character || this instanceof Chicken || this instanceof Endboss) {
-            ctx.beginPath();
-            ctx.lineWidth = '3';
-            ctx.strokeStyle = 'red';
-            ctx.rect(this.x + this.offset.left, this.y + this.offset.top, this.width - this.offset.right, this.height - this.offset.bottom);
-            ctx.stroke();
-        }
-    }
+
+    
 
     isColliding(mo) {
         return this.x + this.width - this.offset.left > mo.x + mo.offset.left &&

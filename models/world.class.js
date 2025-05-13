@@ -10,6 +10,7 @@ class World {
     pixelRatio;
     inputs;
     camera_x = 0
+    statusbar = new StatusBar();
 
     constructor(canvas, inputs, isEndlessLevel) {
         console.log(this.positionX);
@@ -69,6 +70,7 @@ class World {
         this.addObjectsToMap(this.backgrounds);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
+        this.addToMap(this.statusbar);
         this.addToMap(this.character)
 
         this.ctx.translate(-this.camera_x, 0);
