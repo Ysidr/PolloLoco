@@ -11,6 +11,9 @@ class World {
     inputs;
     camera_x = 0
     statusbar = new StatusBar();
+    coinbar = new CoinBar();
+    bossbar = new BossHealth();
+    throwables = [];
 
     constructor(canvas, inputs, isEndlessLevel) {
         console.log(this.positionX);
@@ -27,7 +30,7 @@ class World {
 
         this.draw();
         this.setWorld();
-        this.checkCollisions();
+        this.run();
     }
 
     setWorld() {
@@ -36,16 +39,39 @@ class World {
 
     }
 
-    checkCollisions() {
+    run() {
         setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
-                if(this.character.isColliding(enemy)){
-                    console.log("Collision detected!Hp=",this.character.hp);
-                    this.character.hit(); 
-                                       
-                };
-            });
+            this.checkCollision();
+            this.checkTrowables();
+            this.checkEnemieCollision();
         }, 100);
+    }
+
+    checkTrowables() {
+        if(this.inputs.KeyR){
+            let bottle = new Throwable(this.character.x+100, this.character.y+100);
+            this.throwables.push(bottle);
+        }
+    }
+
+    checkCollision() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isColliding(enemy)) {
+                console.log("Collision detected!Hp=", this.character.hp);
+                this.character.hit();
+                this.statusbar.setPercentage(this.character.hp);
+
+            };
+        });
+    }
+
+    checkEnemieCollision() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.throwables.isColliding(enemy)) {
+                console.log("Collision detected!Hp=", this.character.hp);
+
+            };
+        });
     }
 
 
@@ -70,11 +96,16 @@ class World {
         this.addObjectsToMap(this.backgrounds);
 
         this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.throwables);
+
 
 
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusbar);
+        this.addToMap(this.coinbar);
         this.ctx.translate(this.camera_x, 0);
+
+        this.addToMap(this.bossbar);
 
 
 

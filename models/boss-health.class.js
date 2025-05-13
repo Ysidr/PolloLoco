@@ -1,33 +1,33 @@
-class StatusBar extends DrawableObject {
-    x = 0;
-    y = -25;
+class BossHealth extends MovableObject {
     width = 300;
     height = 80;
+    endnboss = new Endboss();
     IMAGES = [
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/0.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/20.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/40.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/60.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/80.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/100.png',
+        'img/7_statusbars/2_statusbar_endboss/orange/orange0.png',
+        'img/7_statusbars/2_statusbar_endboss/orange/orange20.png',
+        'img/7_statusbars/2_statusbar_endboss/orange/orange40.png',
+        'img/7_statusbars/2_statusbar_endboss/orange/orange60.png',
+        'img/7_statusbars/2_statusbar_endboss/orange/orange80.png',
+        'img/7_statusbars/2_statusbar_endboss/orange/orange100.png',
     ];
+
     percentage = 100;
 
     constructor() {
         super();
+        this.x = this.endnboss.x;
+        this.y = this.endnboss.y;
         this.loadImages(this.IMAGES);
         this.setPercentage(100);
 
     }
+
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.IMAGES[this.resolveImageIndex()];        
             this.img = this.renderFrames[path];       
     }
 
-    calcPercentage(){
-        return this.percentage = this.maxHP / this.hp * 100;
-    }
 
     resolveImageIndex() {
         if (this.percentage == 100) {
@@ -46,4 +46,3 @@ class StatusBar extends DrawableObject {
     }
 
 }
-

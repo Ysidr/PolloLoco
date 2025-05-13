@@ -3,7 +3,7 @@ class MovableObject extends DrawableObject {
     acceleration = 2.5;
     speed = 0.15;
     otherDirection = false;
-    
+
     lastHit = 0;
 
     offset = {
@@ -12,7 +12,7 @@ class MovableObject extends DrawableObject {
         left: 0,
         right: 0
     }
-    constructor(){
+    constructor() {
         super();
         this.statusbar = new StatusBar();
     }
@@ -36,6 +36,7 @@ class MovableObject extends DrawableObject {
 
     isAboveGround() {
         return this.y < 480 - this.height - 40;
+
     }
 
     jump() {
@@ -60,13 +61,13 @@ class MovableObject extends DrawableObject {
 
 
 
-    
+
 
     isColliding(mo) {
         return this.x + this.width - this.offset.left > mo.x + mo.offset.left &&
             this.y + this.height - this.offset.bottom > mo.y + mo.offset.bottom &&
             this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
-            this.y + this.offset.right < mo.y + mo.height- mo.offset.bottom;
+            this.y + this.offset.right < mo.y + mo.height - mo.offset.bottom;
     }
 
     hit() {
@@ -76,8 +77,6 @@ class MovableObject extends DrawableObject {
         } else {
             this.lastHit = new Date().getTime();
         }
-        this.statusbar.setPercentage((this.hp/this.maxHP)*100);
-
     }
 
     isHurt() {

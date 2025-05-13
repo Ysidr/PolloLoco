@@ -4,4 +4,5 @@ class Input {
     KeyW = false;
     KeyS = false;
     Space = false;
+    KeyR = false;
 }
