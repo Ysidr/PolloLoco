@@ -1,10 +1,9 @@
 class MovableObject extends DrawableObject {
-    
     speedY = 0;
     acceleration = 2.5;
     speed = 0.15;
     otherDirection = false;
-    hp = 100;
+    
     lastHit = 0;
 
     offset = {
@@ -12,6 +11,10 @@ class MovableObject extends DrawableObject {
         bottom: 0,
         left: 0,
         right: 0
+    }
+    constructor(){
+        super();
+        this.statusbar = new StatusBar();
     }
 
 
@@ -73,6 +76,8 @@ class MovableObject extends DrawableObject {
         } else {
             this.lastHit = new Date().getTime();
         }
+        this.statusbar.setPercentage((this.hp/this.maxHP)*100);
+
     }
 
     isHurt() {

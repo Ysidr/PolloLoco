@@ -6,6 +6,8 @@ class DrawableObject {
     currentImage = 0;
     height = 150;
     width = 200;
+    maxHP = 100;
+    hp = 100;
 
     loadImage(path) {
         this.img = new Image();
@@ -40,4 +42,5 @@ class DrawableObject {
             ctx.stroke();
         }
     }
+
 }

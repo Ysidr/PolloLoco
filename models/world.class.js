@@ -41,7 +41,8 @@ class World {
             this.level.enemies.forEach((enemy) => {
                 if(this.character.isColliding(enemy)){
                     console.log("Collision detected!Hp=",this.character.hp);
-                    this.character.hit();                    
+                    this.character.hit(); 
+                                       
                 };
             });
         }, 100);
@@ -66,11 +67,18 @@ class World {
         this.ctx.clearRect(0, 0, 750, 480);
 
         this.ctx.translate(this.camera_x, 0);
-
         this.addObjectsToMap(this.backgrounds);
+
         this.addObjectsToMap(this.level.clouds);
-        this.addObjectsToMap(this.level.enemies);
+
+
+        this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusbar);
+        this.ctx.translate(this.camera_x, 0);
+
+
+
+        this.addObjectsToMap(this.level.enemies);
         this.addToMap(this.character)
 
         this.ctx.translate(-this.camera_x, 0);
