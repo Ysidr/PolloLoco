@@ -14,6 +14,7 @@ class World {
     coinbar = new CoinBar();
     bossbar = new BossHealth();
     throwables = [];
+    collectables = [new Coin(100, 100), new Bottle(100, 100), new Coin(300, 100), new Coin(100, 100), new Coin(100, 100),];
 
     constructor(canvas, inputs, isEndlessLevel) {
         console.log(this.positionX);
@@ -44,13 +45,15 @@ class World {
             this.checkCollision();
             this.checkTrowables();
             this.checkEnemieCollision();
+            this.checkCollectableCollision();
         }, 100);
     }
 
     checkTrowables() {
-        if(this.inputs.KeyR){
-            let bottle = new Throwable(this.character.x+100, this.character.y+100);
+        if (this.inputs.KeyR && this.character.trowableCount > 0) {
+            let bottle = new Throwable(this.character.x + 100, this.character.y + 100);
             this.throwables.push(bottle);
+            this.character.trowableCount--;
         }
     }
 
@@ -65,13 +68,44 @@ class World {
         });
     }
 
-    checkEnemieCollision() {
-        this.level.enemies.forEach((enemy) => {
-            if (this.throwables.isColliding(enemy)) {
-                console.log("Collision detected!Hp=", this.character.hp);
-
+    checkCollectableCollision() {
+        this.collectables.forEach((collectable) => {
+            if (this.character.isColliding(collectable)) {
+                this.isCollected(collectable);
             };
         });
+    }
+
+    isCollected(collectable) {
+        this.collectables.splice(this.collectables.indexOf(collectable), 1);
+        if (collectable instanceof Coin) {
+            this.character.coinCount+= 2;
+            this.coinbar.setPercentage(this.character.coinCount);
+        }else if (collectable instanceof Bottle) {
+            this.character.trowableCount+=2;
+        }
+    }
+
+    checkEnemieCollision() {
+        if (this.throwables.length > 0) {
+            this.level.enemies.forEach((enemy) => {
+                this.throwables.forEach(element => {
+                    if (element.isColliding(enemy)) {
+                        this.removeEnemie(enemy);
+                    };
+                });
+            });
+        }
+    }
+
+    removeEnemie(enemy) {
+        if (enemy != this instanceof Endboss) {
+            this.level.enemies.splice(this.level.enemies.indexOf(enemy), 1);
+        }
+    }
+
+    removeThrowable() {
+        this.throwables.length = 0;
     }
 
 
@@ -97,6 +131,7 @@ class World {
 
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.throwables);
+        this.addObjectsToMap(this.collectables);
 
 
 

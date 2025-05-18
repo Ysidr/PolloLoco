@@ -8,6 +8,15 @@ class DrawableObject {
     width = 200;
     maxHP = 100;
     hp = 100;
+    
+
+    offset = {
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0
+    }
+
 
     loadImage(path) {
         this.img = new Image();
@@ -27,14 +36,14 @@ class DrawableObject {
     }
 
     drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Chicken | this instanceof Endboss || this instanceof Throwable) {
+        if (this instanceof Character || this instanceof Chicken | this instanceof Endboss || this instanceof Throwable || this instanceof Collectable) {
             ctx.beginPath();
             ctx.lineWidth = '3';
             ctx.strokeStyle = 'blue';
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         }
-        if (this instanceof Character || this instanceof Chicken || this instanceof Endboss) {
+        if (this instanceof Character || this instanceof Chicken || this instanceof Endboss || this instanceof Throwable || this instanceof Collectable) {
             ctx.beginPath();
             ctx.lineWidth = '3';
             ctx.strokeStyle = 'red';

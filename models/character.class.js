@@ -46,6 +46,9 @@ class Character extends MovableObject {
     }
 
     world;
+
+    coinCount = 0;
+    trowableCount = 0;
     constructor() {
         super().loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
         this.y = 480 - this.height - 40;
@@ -131,5 +134,15 @@ class Character extends MovableObject {
         this.world.backgrounds.splice(startIndex, endIndex + 1)
         this.world.backgrounds.push(...group);
     };
+
+    AddCount(Parameter) {
+        if (Parameter == "Bottle") {
+            this.trowableCount++;
+        } else if (Parameter == "Coin") {
+            this.coinCount++;
+            calcCoinBar(coinCount);
+
+        }
+    }
 
 }
