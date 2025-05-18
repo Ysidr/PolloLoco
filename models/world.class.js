@@ -100,7 +100,8 @@ class World {
     }
 
     removeEnemie(enemy) {
-        if (enemy == this instanceof Endboss) {
+        
+        if (enemy instanceof Endboss) {
             this.bossbar.bossHp -= 30;
             this.bossbar.setPercentage();
         }else {
