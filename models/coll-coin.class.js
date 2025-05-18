@@ -1,5 +1,4 @@
 class Coin extends Collectable {
-<<<<<<< HEAD
     width = 150;
     height = 150;
     offset = {
@@ -8,10 +7,6 @@ class Coin extends Collectable {
         left: 45,
         right: 45
     }
-=======
-    width = 100;
-    height = 100;
->>>>>>> ea0107a63ed3a8299f1ac7b9006a7df23928a558
 
     constructor(x, y) {
         super();

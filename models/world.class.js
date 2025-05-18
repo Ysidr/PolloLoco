@@ -14,11 +14,7 @@ class World {
     coinbar = new CoinBar();
     bossbar = new BossHealth();
     throwables = [];
-<<<<<<< HEAD
     collectables = [new Coin(100, 100), new Bottle(100, 100), new Coin(300, 100), new Coin(100, 100), new Coin(100, 100),];
-=======
-    collectibles = [new Coin(100, 100), new Bottle(100, 100)];
->>>>>>> ea0107a63ed3a8299f1ac7b9006a7df23928a558
 
     constructor(canvas, inputs, isEndlessLevel) {
         console.log(this.positionX);
@@ -54,11 +50,7 @@ class World {
     }
 
     checkTrowables() {
-<<<<<<< HEAD
         if (this.inputs.KeyR && this.character.trowableCount > 0) {
-=======
-        if (this.inputs.KeyR) {
->>>>>>> ea0107a63ed3a8299f1ac7b9006a7df23928a558
             let bottle = new Throwable(this.character.x + 100, this.character.y + 100);
             this.throwables.push(bottle);
             this.character.trowableCount--;
@@ -76,35 +68,12 @@ class World {
         });
     }
 
-<<<<<<< HEAD
     checkCollectableCollision() {
         this.collectables.forEach((collectable) => {
             if (this.character.isColliding(collectable)) {
                 this.isCollected(collectable);
             };
         });
-=======
-    checkEnemieCollision() {
-        if (this.throwables.length > 0) {
-            this.level.enemies.forEach((enemy) => {
-                this.throwables.forEach(element => {
-                    if (element.isColliding(enemy)) {
-                        this.removeEnemie(enemy);
-                    };
-                });
-            });
-        }
-    }
-
-    removeEnemie(enemy) {
-        if (enemy != this instanceof Endboss) {
-            this.level.enemies.splice(this.level.enemies.indexOf(enemy), 1);
-        }
-    }
-
-    removeThrowable() {
-        this.throwables.length = 0;
->>>>>>> ea0107a63ed3a8299f1ac7b9006a7df23928a558
     }
 
     isCollected(collectable) {
@@ -162,11 +131,7 @@ class World {
 
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.throwables);
-<<<<<<< HEAD
         this.addObjectsToMap(this.collectables);
-=======
-        this.addObjectsToMap(this.collectibles);
->>>>>>> ea0107a63ed3a8299f1ac7b9006a7df23928a558
 
 
 
