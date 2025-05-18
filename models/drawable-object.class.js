@@ -8,6 +8,7 @@ class DrawableObject {
     width = 200;
     maxHP = 100;
     hp = 100;
+<<<<<<< HEAD
     
 
     offset = {
@@ -16,6 +17,10 @@ class DrawableObject {
         left: 0,
         right: 0
     }
+=======
+    throwabeCount = 0;
+    coinCount = 0;
+>>>>>>> ea0107a63ed3a8299f1ac7b9006a7df23928a558
 
 
     loadImage(path) {
