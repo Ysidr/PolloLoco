@@ -9,10 +9,10 @@ class Bottle extends Collectable {
         right: 30
     }
 
-    constructor(x, y) {
+    constructor() {
         super();
-        this.x = 250 + Math.random() * 500;
-        this.y = y;
+        this.x = 250 + Math.random() * 1500;
+        this.y = 100;
         this.loadImage('img/6_salsa_bottle/salsa_bottle.png');
     } 
 

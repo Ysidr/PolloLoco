@@ -14,7 +14,7 @@ class World {
     coinbar = new CoinBar();
     bossbar = new BossHealth();
     throwables = [];
-    collectables = [new Coin(100, 100), new Bottle(100, 100), new Coin(300, 100), new Coin(100, 100), new Coin(100, 100),];
+    collectables = [new Coin(), new Bottle(), new Coin(), new Coin(), new Coin(), new Bottle(), new Bottle(), new Bottle(), new Bottle()];
 
     constructor(canvas, inputs, isEndlessLevel) {
         console.log(this.positionX);
