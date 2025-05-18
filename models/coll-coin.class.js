@@ -8,10 +8,10 @@ class Coin extends Collectable {
         right: 45
     }
 
-    constructor(x, y) {
+    constructor() {
         super();
-        this.x = 250 + Math.random() * 500;
-        this.y = y;
+        this.x = 250 + Math.random() * 1500;
+        this.y = 100;
         this.loadImage('img/8_coin/coin_2.png');
     } 
 }

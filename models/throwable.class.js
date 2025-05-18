@@ -33,6 +33,7 @@ class Throwable extends MovableObject {
         const refreshIntervalId = setInterval(() => {
             this.playAnimation(this.IMAGES);
             this.x += 5;
+            
             if (this.isAboveGround() == false) {
                 clearInterval(refreshIntervalId); // Stop the interval
                 this.bottleSplash(); // Call the bottleSplash method

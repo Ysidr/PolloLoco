@@ -1,7 +1,9 @@
 class BossHealth extends MovableObject {
     width = 300;
     height = 80;
-    endnboss = new Endboss();
+    endboss = new Endboss();
+    bossHp = 90;
+
     IMAGES = [
         'img/7_statusbars/2_statusbar_endboss/orange/orange0.png',
         'img/7_statusbars/2_statusbar_endboss/orange/orange20.png',
@@ -11,19 +13,17 @@ class BossHealth extends MovableObject {
         'img/7_statusbars/2_statusbar_endboss/orange/orange100.png',
     ];
 
-    percentage = 100;
-
     constructor() {
         super();
-        this.x = this.endnboss.x;
-        this.y = this.endnboss.y;
+        this.x = this.endboss.x;
+        this.y = this.endboss.y;
         this.loadImages(this.IMAGES);
-        this.setPercentage(100);
+        this.setPercentage();
 
     }
 
-    setPercentage(percentage) {
-        this.percentage = percentage;
+    setPercentage() {
+        this.percentage = this.bossHp/90 * 100;
         let path = this.IMAGES[this.resolveImageIndex()];        
             this.img = this.renderFrames[path];       
     }

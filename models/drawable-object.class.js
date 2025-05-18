@@ -8,6 +8,7 @@ class DrawableObject {
     width = 200;
     maxHP = 100;
     hp = 100;
+    bossHp = 100;
     
 
     offset = {
