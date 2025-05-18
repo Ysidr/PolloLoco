@@ -8,6 +8,9 @@ class DrawableObject {
     width = 200;
     maxHP = 100;
     hp = 100;
+    throwabeCount = 0;
+    coinCount = 0;
+
 
     loadImage(path) {
         this.img = new Image();
@@ -27,7 +30,7 @@ class DrawableObject {
     }
 
     drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Chicken | this instanceof Endboss || this instanceof Throwable) {
+        if (this instanceof Character || this instanceof Chicken | this instanceof Endboss || this instanceof Throwable || this instanceof Collectable) {
             ctx.beginPath();
             ctx.lineWidth = '3';
             ctx.strokeStyle = 'blue';

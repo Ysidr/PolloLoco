@@ -14,6 +14,7 @@ class World {
     coinbar = new CoinBar();
     bossbar = new BossHealth();
     throwables = [];
+    collectibles = [new Coin(100, 100), new Bottle(100, 100)];
 
     constructor(canvas, inputs, isEndlessLevel) {
         console.log(this.positionX);
@@ -48,8 +49,8 @@ class World {
     }
 
     checkTrowables() {
-        if(this.inputs.KeyR){
-            let bottle = new Throwable(this.character.x+100, this.character.y+100);
+        if (this.inputs.KeyR) {
+            let bottle = new Throwable(this.character.x + 100, this.character.y + 100);
             this.throwables.push(bottle);
         }
     }
@@ -66,12 +67,25 @@ class World {
     }
 
     checkEnemieCollision() {
-        this.level.enemies.forEach((enemy) => {
-            if (this.throwables.isColliding(enemy)) {
-                console.log("Collision detected!Hp=", this.character.hp);
+        if (this.throwables.length > 0) {
+            this.level.enemies.forEach((enemy) => {
+                this.throwables.forEach(element => {
+                    if (element.isColliding(enemy)) {
+                        this.removeEnemie(enemy);
+                    };
+                });
+            });
+        }
+    }
 
-            };
-        });
+    removeEnemie(enemy) {
+        if (enemy != this instanceof Endboss) {
+            this.level.enemies.splice(this.level.enemies.indexOf(enemy), 1);
+        }
+    }
+
+    removeThrowable() {
+        this.throwables.length = 0;
     }
 
 
@@ -97,6 +111,7 @@ class World {
 
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.throwables);
+        this.addObjectsToMap(this.collectibles);
 
 
 
