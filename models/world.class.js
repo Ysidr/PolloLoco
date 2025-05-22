@@ -14,7 +14,7 @@ class World {
     coinbar = new CoinBar();
     bossbar = new BossHealth();
     throwables = [];
-    collectables = [new Coin(), new Bottle(), new Coin(), new Coin(), new Coin(), new Bottle(), new Bottle(), new Bottle(), new Bottle()];
+    collectables = level1.collectibles;
 
     constructor(canvas, inputs, isEndlessLevel) {
         console.log(this.positionX);
@@ -46,7 +46,16 @@ class World {
             this.checkTrowables();
             this.checkEnemieCollision();
             this.checkCollectableCollision();
+            this.checkGameEnd();
         }, 100);
+
+
+    }
+
+    checkGameEnd() {
+        if (this.character.hp <= 0) {
+            this.resetGame()
+        }
     }
 
     checkTrowables() {
@@ -79,10 +88,10 @@ class World {
     isCollected(collectable) {
         this.collectables.splice(this.collectables.indexOf(collectable), 1);
         if (collectable instanceof Coin) {
-            this.character.coinCount+= 2;
+            this.character.coinCount += 2;
             this.coinbar.setPercentage(this.character.coinCount);
-        }else if (collectable instanceof Bottle) {
-            this.character.trowableCount+=2;
+        } else if (collectable instanceof Bottle) {
+            this.character.trowableCount += 2;
         }
     }
 
@@ -100,11 +109,11 @@ class World {
     }
 
     removeEnemie(enemy) {
-        
+
         if (enemy instanceof Endboss) {
             this.bossbar.bossHp -= 30;
             this.bossbar.setPercentage();
-        }else {
+        } else {
             this.level.enemies.splice(this.level.enemies.indexOf(enemy), 1);
 
         }
@@ -191,6 +200,28 @@ class World {
     flipImgBack(mo) {
         mo.x = -mo.x;
         this.ctx.restore();
+    }
+
+    resetGame() {
+        this.clearAllIntervals(); // Clear all intervals
+    }
+
+    clearAllIntervals() {
+        this.character.clearAllIntervals();
+        this.level.enemies.forEach(enemy => {
+            enemy.clearAllIntervals();
+        });
+        this.throwables.forEach(throwable => {
+            throwable.clearAllIntervals();
+        });
+        clearInterval(19);//running interval
+
+
+        setTimeout(() => {
+            this.world = null
+
+        }, 1000);
+
     }
 }
 

@@ -9,7 +9,7 @@ class DrawableObject {
     maxHP = 100;
     hp = 100;
     bossHp = 100;
-    
+    intervals = [];
 
     offset = {
         top: 0,
@@ -17,7 +17,6 @@ class DrawableObject {
         left: 0,
         right: 0
     }
-
 
     loadImage(path) {
         this.img = new Image();
@@ -53,4 +52,14 @@ class DrawableObject {
         }
     }
 
+    setInterval(callback, delay) {
+        const intervalId = setInterval(callback, delay);
+        this.intervals.push(intervalId);
+        return intervalId;
+    }
+
+    clearAllIntervals() {
+        this.intervals.forEach(clearInterval);
+        this.intervals = [];
+    }
 }

@@ -1,14 +1,14 @@
 let canvas;
 let world;
 let inputs = new Input();
-let isEndlessLevel= false;
+let isEndlessLevel = false;
 
 
 
 function init() {
     canvas = document.getElementById("canvas");
+    world = null;
     world = new World(canvas, inputs, isEndlessLevel);
-    console.log(world);
 }
 
 window.addEventListener('keydown', (event) => {
@@ -23,10 +23,10 @@ window.addEventListener('keyup', (event) => {
     }
 });
 
-function toggleEndlessMode(){
+function toggleEndlessMode() {
     if (document.getElementById("endlessMode").checked) {
-        isEndlessLevel = true; 
-    }else {
+        isEndlessLevel = true;
+    } else {
         isEndlessLevel = false;
     }
     init();

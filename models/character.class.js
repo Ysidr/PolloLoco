@@ -66,7 +66,7 @@ class Character extends MovableObject {
 
     animate() {
 
-        setInterval(() => {
+        this.setInterval(() => {
             if (this.world.inputs.KeyD && (this.world.isEndlessLevel || this.x < this.world.level.levelEndX)) {
                 this.moveRight();
             }
@@ -79,7 +79,7 @@ class Character extends MovableObject {
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
 
-        setInterval(() => {
+        this.setInterval(() => {
 
             if (this.isDead()) {
                 this.playAnimation(this.framesDead);

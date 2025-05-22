@@ -30,7 +30,7 @@ class Throwable extends MovableObject {
     throw() {
         this.speedY = 20;
         this.applyGravity();
-        const refreshIntervalId = setInterval(() => {
+        const refreshIntervalId = this.setInterval(() => {
             this.playAnimation(this.IMAGES);
             this.x += 5;
             
