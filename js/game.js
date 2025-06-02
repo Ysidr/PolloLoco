@@ -3,7 +3,21 @@ let world;
 let inputs = new Input();
 let isEndlessLevel = false;
 
+function startGame() {
+    Addnone('startScreen');
+    Addnone('endScreen');
+    Removednone('canvas');
+    init();
+}
 
+function Removednone(id) {
+    document.getElementById(id).classList.remove("d-none");
+
+}
+function Addnone(id) {
+    document.getElementById(id).classList.add("d-none");
+
+}
 
 function init() {
     canvas = document.getElementById("canvas");
@@ -32,6 +46,10 @@ function toggleEndlessMode() {
     init();
 }
 
-function ToggledNone (id){
-    document.getElementById(id).classList.toggle("d-none");
+function DisplayEndScreen (status) {
+    if (status == 'lost') {
+        document.getElementById("endScreen").style.backgroundImage = "url(img/You won, you lost/Game Over.png)";
+    } else if (status == 'won') {
+        document.getElementById("endScreen").style.backgroundImage = "url(img/You won, you lost/You won A.png)";
+    }
 }

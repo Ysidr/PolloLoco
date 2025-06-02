@@ -15,6 +15,7 @@ class World {
     bossbar = new BossHealth();
     throwables = [];
     collectables = level1.collectibles;
+    intervalsWorld = [];
 
     constructor(canvas, inputs, isEndlessLevel) {
         console.log(this.positionX);
@@ -41,7 +42,7 @@ class World {
     }
 
     run() {
-        setInterval(() => {
+        this.setInterval(() => {
             this.checkCollision();
             this.checkTrowables();
             this.checkEnemieCollision();
@@ -50,11 +51,15 @@ class World {
         }, 100);
 
 
+
+
     }
 
     checkGameEnd() {
         if (this.character.hp <= 0) {
-            this.resetGame()
+            this.resetGame('lost')
+        } else if (this.bossbar.bossHp <= 0) {
+            this.resetGame('won');
         }
     }
 
@@ -202,10 +207,6 @@ class World {
         this.ctx.restore();
     }
 
-    resetGame() {
-        this.clearAllIntervals(); // Clear all intervals
-    }
-
     clearAllIntervals() {
         this.character.clearAllIntervals();
         this.level.enemies.forEach(enemy => {
@@ -214,14 +215,31 @@ class World {
         this.throwables.forEach(throwable => {
             throwable.clearAllIntervals();
         });
-        clearInterval(19);//running interval
 
+        clearAllIntervals()         //running interval
+    }
 
-        setTimeout(() => {
-            this.world = null
+    setInterval(callback, delay) {
+        const intervalId = setInterval(callback, delay);
+        this.intervalsWorld.push(intervalId);
+        return intervalId;
+    }
 
-        }, 1000);
+    clearAllIntervals() {
+        this.intervalsWorld.forEach(clearInterval);
+        this.intervalsWorld = [];
+    }
 
+    resetGame(condition) {
+        Removednone('endScreen');
+        Addnone('canvas');
+        if (condition === 'lost') {
+            DisplayEndScreen('lost');
+        } else if (condition === 'won') {
+            DisplayEndScreen('won');
+        }
+
+        this.clearAllIntervals(); // Clear all intervals
     }
 }
 
