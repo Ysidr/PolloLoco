@@ -31,3 +31,7 @@ function toggleEndlessMode() {
     }
     init();
 }
+
+function ToggledNone (id){
+    document.getElementById(id).classList.toggle("d-none");
+}
