@@ -46,10 +46,13 @@ function toggleEndlessMode() {
     init();
 }
 
-function DisplayEndScreen (status) {
+function DisplayEndScreen(status) {
+    const endScreen = document.getElementById("endScreen");
+    endScreen.classList.remove("d-none"); // Ensure the element is visible
+
     if (status == 'lost') {
-        document.getElementById("endScreen").style.backgroundImage = "url(img/You won, you lost/Game Over.png)";
+        endScreen.style.backgroundImage = "url('img/You won, you lost/Game Over.png')";
     } else if (status == 'won') {
-        document.getElementById("endScreen").style.backgroundImage = "url(img/You won, you lost/You won A.png)";
+        endScreen.style.backgroundImage = "url('img/You won, you lost/You won A.png')";
     }
 }
