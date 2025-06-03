@@ -40,9 +40,16 @@
         </canvas>
         <div class="startScreen" id="startScreen">
             <button onclick="startGame()">Start</button>
+            <button onclick="openSettings()">Setting</button>
         </div>
         <div class="endScreen d-none" id="endScreen">
-            <button onclick="startGame()">Start</button>
+            <button onclick="startGame()">Replay</button>
+            <button onclick="openSettings()">Setting</button>
+            <button onclick="backToStart()">Back</button>
+
+        </div>
+        <div class="settingScreen d-none" id="settingScreen">
+            <button onclick="backToStart()">Back</button>
         </div>
     </div>
     <input type="checkbox" id="endlessMode" onchange="toggleEndlessMode()">

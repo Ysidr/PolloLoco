@@ -8,6 +8,7 @@ body {
     background-image: url("img/dubai-desert-safari-6826298_1280.jpg");
     background-position: center;
     background-size: cover;
+    margin: 0;
 }
 
 .content {
@@ -43,6 +44,14 @@ h1 {
     background-position: center;
 }
 
-.d-none{
+.settingScreen {
+    width: 100%;
+    height: 100%;
+    background-image: url("img/9_intro_outro_screens/start/startscreen_1.png");
+    background-size: cover;
+    background-position: center;
+}
+
+.d-none {
     display: none;
 }

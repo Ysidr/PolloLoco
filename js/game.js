@@ -7,6 +7,7 @@ function startGame() {
     Addnone('startScreen');
     Addnone('endScreen');
     Removednone('canvas');
+    Addnone('settingScreen');
     init();
 }
 
@@ -55,4 +56,18 @@ function DisplayEndScreen(status) {
     } else if (status == 'won') {
         endScreen.style.backgroundImage = "url('img/You won, you lost/You won A.png')";
     }
+}
+
+function openSettings(){
+    Addnone('startScreen');
+    Addnone('endScreen');
+    Removednone('settingScreen');
+    Addnone('canvas');
+}
+
+function backToStart(){
+    Removednone('startScreen');
+    Addnone('endScreen');
+    Addnone('settingScreen');
+    Addnone('canvas');
 }
