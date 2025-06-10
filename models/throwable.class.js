@@ -28,12 +28,13 @@ class Throwable extends MovableObject {
     }
 
     throw() {
+        this.CheckForCooldown();
         this.speedY = 20;
         this.applyGravity();
         const refreshIntervalId = this.setInterval(() => {
             this.playAnimation(this.IMAGES);
             this.x += 5;
-            
+
             if (this.isAboveGround() == false) {
                 clearInterval(refreshIntervalId); // Stop the interval
                 this.bottleSplash(); // Call the bottleSplash method
@@ -46,6 +47,11 @@ class Throwable extends MovableObject {
         setTimeout(() => {
             world.removeThrowable(this)
         }, "100");
+    }
+
+    CheckForCooldown(){
+        this.lastUse = new Date().getTime();
+
     }
 }
 

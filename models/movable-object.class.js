@@ -5,6 +5,7 @@ class MovableObject extends DrawableObject {
     otherDirection = false;
 
     lastHit = 0;
+    lastUse = 0;
 
 
     constructor() {
@@ -54,9 +55,6 @@ class MovableObject extends DrawableObject {
             this.otherDirection = true;
         }
     }
-
-
-
 
 
     isColliding(mo) {
